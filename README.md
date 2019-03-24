@@ -1,19 +1,19 @@
 # clean-code-javascript
 
-## Table des matières
+## Table Des Matières
 
 1.  [Introduction](#introduction)
 2.  [Variables](#variables)
-3.  [Functions](#functions)
-4.  [Objects and Data Structures](#objects-and-data-structures)
+3.  [Fonctions](#fonctions)
+4.  [Objets et Structures De Données](#objets-et-structures-de-données)
 5.  [Classes](#classes)
 6.  [SOLID](#solid)
-7.  [Testing](#testing)
-8.  [Concurrency](#concurrency)
-9.  [Error Handling](#error-handling)
-10. [Formatting](#formatting)
-11. [Comments](#comments)
-12. [Translation](#translation)
+7.  [Testage](#testage)
+8.  [Simultanéité](#simultanéité)
+9.  [La Gestion Des Erreurs](#la-gestion-des-erreurs)
+10. [Mise En Forme](#mise-en-forme)
+11. [Commentaires](#commentaires)
+12. [Traduction](#traduction)
 
 ## Introduction
 
