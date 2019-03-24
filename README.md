@@ -47,7 +47,7 @@ const yyyymmdstr = moment().format("YYYY/MM/DD");
 const currentDate = moment().format("YYYY/MM/DD");
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Utilisez le même vocabulaire pour le même type de variable
 
@@ -65,7 +65,7 @@ obtenirFicheDuClient();
 obtenirUtiilisateur();
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Utilisez des noms interrogeables
 
@@ -93,7 +93,7 @@ const MILLISECONDES_PAR_JOUR = 86400000;
 setTimeout(misÀFeu, MILLISECONDES_PAR_JOUR);
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Utiliser des variables explicatives
 
@@ -117,7 +117,7 @@ const [, ville, codePostal] = adresse.match(codePostalVilleRegex) || [];
 enregistrerCodePostalVille(ville, codePostal);
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Éviter la cartographie mentale
 
@@ -152,7 +152,7 @@ endroits.forEach(endroit => {
 });
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Ne pas ajouter de contexte inutile
 
@@ -187,7 +187,7 @@ function peindreLaVoiture(voiture) {
 }
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Utiliser des arguments par défaut au lieu de court-circuiter ou conditionnels
 
@@ -213,7 +213,7 @@ function créerUneMicroBrasserie(nom = "Hipster Brew Co.") {
 }
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ## **Fonctions**
 
@@ -269,7 +269,7 @@ créerUnMenu({
 });
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Les fonctions doivent faire une chose
 
@@ -305,7 +305,7 @@ function estClientActif(client) {
 }
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Les noms de fonction doivent dire ce qu'ils font
 
@@ -333,7 +333,7 @@ const date = new Date();
 ajouterMoisÀDate(1, date);
 ```
 
-**[⬆ retour au sommet](#table-of-contents)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ### Functions should only be one level of abstraction
 
@@ -405,7 +405,7 @@ function parse(tokens) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Remove duplicate code
 
@@ -491,7 +491,7 @@ function showEmployeeList(employees) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Set default objects with Object.assign
 
@@ -544,7 +544,7 @@ function createMenu(config) {
 createMenu(menuConfig);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Don't use flags as function parameters
 
@@ -574,7 +574,7 @@ function createTempFile(name) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid Side Effects (part 1)
 
@@ -623,7 +623,7 @@ console.log(name); // 'Ryan McDermott';
 console.log(newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid Side Effects (part 2)
 
@@ -676,7 +676,7 @@ const addItemToCart = (cart, item) => {
 };
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Don't write to global functions
 
@@ -710,7 +710,7 @@ class SuperArray extends Array {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Favor functional programming over imperative programming
 
@@ -775,7 +775,7 @@ const totalOutput = programmerOutput.reduce(
 );
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Encapsulate conditionals
 
@@ -799,7 +799,7 @@ if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid negative conditionals
 
@@ -827,7 +827,7 @@ if (isDOMNodePresent(node)) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid conditionals
 
@@ -887,7 +887,7 @@ class Cessna extends Airplane {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid type-checking (part 1)
 
@@ -916,7 +916,7 @@ function travelToTexas(vehicle) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid type-checking (part 2)
 
@@ -953,7 +953,7 @@ function combine(val1, val2) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Don't over-optimize
 
@@ -981,7 +981,7 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Remove dead code
 
@@ -1015,7 +1015,7 @@ const req = newRequestModule;
 inventoryTracker("apples", req, "www.inventory-awesome.io");
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Objects and Data Structures**
 
@@ -1078,7 +1078,7 @@ const account = makeBankAccount();
 account.setBalance(100);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Make objects have private members
 
@@ -1118,7 +1118,7 @@ delete employee.name;
 console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Classes**
 
@@ -1205,7 +1205,7 @@ class Human extends Mammal {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Use method chaining
 
@@ -1285,7 +1285,7 @@ class Car {
 const car = new Car("Ford", "F-150", "red").setColor("pink").save();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Prefer composition over inheritance
 
@@ -1355,7 +1355,7 @@ class Employee {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **SOLID**
 
@@ -1417,7 +1417,7 @@ class UserSettings {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Open/Closed Principle (OCP)
 
@@ -1508,7 +1508,7 @@ class HttpRequester {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Liskov Substitution Principle (LSP)
 
@@ -1627,7 +1627,7 @@ const shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeShapes(shapes);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Interface Segregation Principle (ISP)
 
@@ -1705,7 +1705,7 @@ const $ = new DOMTraverser({
 });
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Dependency Inversion Principle (DIP)
 
@@ -1808,7 +1808,7 @@ const inventoryTracker = new InventoryTracker(
 inventoryTracker.requestItems();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Testing**
 
@@ -1879,7 +1879,7 @@ describe("MakeMomentJSGreatAgain", () => {
 });
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Concurrency**
 
@@ -1930,7 +1930,7 @@ get("https://en.wikipedia.org/wiki/Robert_Cecil_Martin")
   });
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Async/Await are even cleaner than Promises
 
@@ -1977,7 +1977,7 @@ async function getCleanCodeArticle() {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Error Handling**
 
@@ -2056,7 +2056,7 @@ getdata()
   });
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Formatting**
 
@@ -2107,7 +2107,7 @@ class Animal {}
 class Alpaca {}
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Function callers and callees should be close
 
@@ -2195,7 +2195,7 @@ const review = new PerformanceReview(employee);
 review.perfReview();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## **Comments**
 
@@ -2242,7 +2242,7 @@ function hashIt(data) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Don't leave commented out code in your codebase
 
@@ -2263,7 +2263,7 @@ doStuff();
 doStuff();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Don't have journal comments
 
@@ -2292,7 +2292,7 @@ function combine(a, b) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ### Avoid positional markers
 
@@ -2331,7 +2331,7 @@ const actions = function() {
 };
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
 
 ## Translation
 
@@ -2356,4 +2356,4 @@ This is also available in other languages:
 - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italian**:
   [frappacchio/clean-code-javascript/](https://github.com/frappacchio/clean-code-javascript/)
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-des-matières)**
