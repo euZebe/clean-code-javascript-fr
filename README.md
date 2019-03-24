@@ -5,7 +5,7 @@
 1.  [Introduction](#introduction)
 2.  [Variables](#variables)
 3.  [Fonctions](#fonctions)
-4.  [Objets et Structures De Données](#objets-et-structures-de-données)
+4.  [Objets Et Structures De Données](#objets-et-structures-de-données)
 5.  [Classes](#classes)
 6.  [SOLID](#solid)
 7.  [Testage](#testage)
