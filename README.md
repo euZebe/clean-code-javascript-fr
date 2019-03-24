@@ -655,203 +655,203 @@ Deux mises en garde à mentionner à cette approche:
 
 2.  Le clonage de gros objets peut être très coûteux en termes de performances. Heureusement,
          ce n'est pas un gros problème dans la pratique car il y a
-    [grandes bibliothèques](https://facebook.github.io/immutable-js/) qui permettent
+    [grandes libraries](https://facebook.github.io/immutable-js/) qui permettent
          ce type d’approche de programmation doit être rapide et ne nécessite pas autant de mémoire que
          ce serait à vous de cloner manuellement des objets et des tableaux.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-const addItemToCart = (cart, item) => {
-  cart.push({ item, date: Date.now() });
+const AjouterUnArticleAuPanier = (panier, article) => {
+  cart.push({ article, date: Date.now() });
 };
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-const addItemToCart = (cart, item) => {
-  return [...cart, { item, date: Date.now() }];
+const AjouterUnArticleAuPanier = (panier, article) => {
+  return [...panier, { article, date: Date.now() }];
 };
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Don't write to global functions
+### Ne pas écrire dans les fonctions globales
 
-Polluting globals is a bad practice in JavaScript because you could clash with another
-library and the user of your API would be none-the-wiser until they get an
-exception in production. Let's think about an example: what if you wanted to
-extend JavaScript's native Array method to have a `diff` method that could
-show the difference between two arrays? You could write your new function
-to the `Array.prototype`, but it could clash with another library that tried
-to do the same thing. What if that other library was just using `diff` to find
-the difference between the first and last elements of an array? This is why it
-would be much better to just use ES2015/ES6 classes and simply extend the `Array` global.
+Les globaux polluants sont une mauvaise pratique en JavaScript car vous pourriez vous heurter à un autre
+bibliothèque et l'utilisateur de votre API serait absolument inutile jusqu'à ce qu'ils obtiennent un
+exception en production. Pensons à un exemple: et si vous vouliez
+étendre la méthode Array native de JavaScript pour avoir une méthode `diff` qui pourrait
+montrer la différence entre deux tableaux? Vous pouvez écrire votre nouvelle fonction
+`Array.prototype`, mais il pourrait entrer en conflit avec une autre bibliothèque qui a essayé
+faire la même chose. Et si cette autre bibliothèque utilisait simplement `diff` pour trouver
+la différence entre le premier et le dernier élément d'un tableau? C'est pourquoi ça
+Il serait bien mieux d’utiliser simplement les classes ES2015 / ES6 et d’étendre simplement le `Array` global.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-Array.prototype.diff = function diff(comparisonArray) {
-  const hash = new Set(comparisonArray);
+Array.prototype.diff = function diff(tableauDeComparaison) {
+  const hash = new Set(tableauDeComparaison);
   return this.filter(elem => !hash.has(elem));
 };
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
 class SuperArray extends Array {
-  diff(comparisonArray) {
-    const hash = new Set(comparisonArray);
+  diff(tableauDeComparaison) {
+    const hash = new Set(tableauDeComparaison);
     return this.filter(elem => !hash.has(elem));
   }
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Favor functional programming over imperative programming
+### Privilégier la programmation fonctionnelle à la programmation impérative
 
-JavaScript isn't a functional language in the way that Haskell is, but it has
-a functional flavor to it. Functional languages can be cleaner and easier to test.
-Favor this style of programming when you can.
+JavaScript n'est pas un langage fonctionnel comme Haskell, mais il a
+une saveur fonctionnelle à elle. Les langages fonctionnels peuvent être plus propres et plus faciles à tester.
+Privilégiez ce style de programmation quand vous le pouvez.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-const programmerOutput = [
+const sortieDuProgrammeur = [
   {
-    name: "Uncle Bobby",
-    linesOfCode: 500
+    nom: "Oncle Bobby",
+    linesDeCode: 500
   },
   {
-    name: "Suzie Q",
-    linesOfCode: 1500
+    nom: "Suzie Q",
+    linesDeCode: 1500
   },
   {
-    name: "Jimmy Gosling",
-    linesOfCode: 150
+    nom: "Jimmy Gosling",
+    linesDeCode: 150
   },
   {
-    name: "Gracie Hopper",
-    linesOfCode: 1000
+    nom: "Gracie Hopper",
+    linesDeCode: 1000
   }
 ];
 
-let totalOutput = 0;
+let sortieTotale = 0;
 
-for (let i = 0; i < programmerOutput.length; i++) {
-  totalOutput += programmerOutput[i].linesOfCode;
+for (let i = 0; i < sortieDuProgrammeur.length; i++) {
+  sortieTotale += sortieDuProgrammeur[i].linesDeCode;
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-const programmerOutput = [
+const sortieDuProgrammeur = [
   {
-    name: "Uncle Bobby",
-    linesOfCode: 500
+    nom: "Oncle Bobby",
+    linesDeCode: 500
   },
   {
-    name: "Suzie Q",
-    linesOfCode: 1500
+    nom: "Suzie Q",
+    linesDeCode: 1500
   },
   {
-    name: "Jimmy Gosling",
-    linesOfCode: 150
+    nom: "Jimmy Gosling",
+    linesDeCode: 150
   },
   {
-    name: "Gracie Hopper",
-    linesOfCode: 1000
+    nom: "Gracie Hopper",
+    linesDeCode: 1000
   }
 ];
 
-const totalOutput = programmerOutput.reduce(
-  (totalLines, output) => totalLines + output.linesOfCode,
+const sortieTotale = sortieDuProgrammeur.reduce(
+  (linesTotal, sortie) => linesTotal + sortie.linesDeCode,
   0
 );
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Encapsulate conditionals
+### Encapsuler des conditions
 
-**Bad:**
+**Mal:**
 
 ```javascript
-if (fsm.state === "fetching" && isEmpty(listNode)) {
+if (fsm.state === "chercher" && estVide(listNode)) {
   // ...
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function shouldShowSpinner(fsm, listNode) {
-  return fsm.state === "fetching" && isEmpty(listNode);
+function devraitMontrerSpinner(fsm, listNode) {
+  return fsm.state === "chercher" && estVide(listNode);
 }
 
-if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
+if (devraitMontrerSpinner(fsmInstance, listNodeInstance)) {
   // ...
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Avoid negative conditionals
+### Éviter les conditionnels négatifs
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function isDOMNodeNotPresent(node) {
+function DOMNodeNestPasPrésent(node) {
   // ...
 }
 
-if (!isDOMNodeNotPresent(node)) {
+if (!DOMNodeNestPasPrésent(node)) {
   // ...
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function isDOMNodePresent(node) {
+function estDOMNodePresent(node) {
   // ...
 }
 
-if (isDOMNodePresent(node)) {
+if (estDOMNodePresent(node)) {
   // ...
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Avoid conditionals
+### Éviter les conditionnels
 
-This seems like an impossible task. Upon first hearing this, most people say,
-"how am I supposed to do anything without an `if` statement?" The answer is that
-you can use polymorphism to achieve the same task in many cases. The second
-question is usually, "well that's great but why would I want to do that?" The
-answer is a previous clean code concept we learned: a function should only do
-one thing. When you have classes and functions that have `if` statements, you
-are telling your user that your function does more than one thing. Remember,
-just do one thing.
+Cela semble être une tâche impossible. En entendant cela, la plupart des gens disent:
+"comment suis-je censé faire quoi que ce soit sans une déclaration`if`? " La réponse est que
+vous pouvez utiliser le polymorphisme pour accomplir la même tâche dans de nombreux cas. La deuxième
+la question est généralement, "bien c'est génial, mais pourquoi voudrais-je faire cela?" le
+answer est un précédent concept de code propre que nous avons appris: une fonction ne devrait faire que
+une chose. Quand vous avez des classes et des fonctions qui ont des instructions `if`, vous
+dites à votre utilisateur que votre fonction fait plus d’une chose. Rappelles toi,
+faites juste une chose.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-class Airplane {
+class Avion {
   // ...
-  getCruisingAltitude() {
+  obtenirAltitudeDeCroisière() {
     switch (this.type) {
       case "777":
-        return this.getMaxAltitude() - this.getPassengerCount();
+        return this.obtenirAltitudeMax() - this.obtenirLeNombreDePassagers();
       case "Air Force One":
-        return this.getMaxAltitude();
+        return this.obtenirAltitudeMax();
       case "Cessna":
-        return this.getMaxAltitude() - this.getFuelExpenditure();
+        return this.obtenirAltitudeMax() - this.obtenirDépensesDeCarburant();
     }
   }
 }
@@ -860,79 +860,79 @@ class Airplane {
 **Good:**
 
 ```javascript
-class Airplane {
+class Avion {
   // ...
 }
 
-class Boeing777 extends Airplane {
+class Boeing777 extends Avion {
   // ...
-  getCruisingAltitude() {
-    return this.getMaxAltitude() - this.getPassengerCount();
+  obtenirAltitudeDeCroisière() {
+    return this.obtenirAltitudeMax() - this.obtenirLeNombreDePassagers();
   }
 }
 
-class AirForceOne extends Airplane {
+class AirForceOne extends Avion {
   // ...
-  getCruisingAltitude() {
-    return this.getMaxAltitude();
+  obtenirAltitudeDeCroisière() {
+    return this.obtenirAltitudeMax();
   }
 }
 
-class Cessna extends Airplane {
+class Cessna extends Avion {
   // ...
-  getCruisingAltitude() {
-    return this.getMaxAltitude() - this.getFuelExpenditure();
-  }
-}
-```
-
-**[⬆ back to top](#table-des-matières)**
-
-### Avoid type-checking (part 1)
-
-JavaScript is untyped, which means your functions can take any type of argument.
-Sometimes you are bitten by this freedom and it becomes tempting to do
-type-checking in your functions. There are many ways to avoid having to do this.
-The first thing to consider is consistent APIs.
-
-**Bad:**
-
-```javascript
-function travelToTexas(vehicle) {
-  if (vehicle instanceof Bicycle) {
-    vehicle.pedal(this.currentLocation, new Location("texas"));
-  } else if (vehicle instanceof Car) {
-    vehicle.drive(this.currentLocation, new Location("texas"));
+  obtenirAltitudeDeCroisière() {
+    return this.obtenirAltitudeMax() - this.obtenirDépensesDeCarburant();
   }
 }
 ```
 
-**Good:**
+**[⬆ retour au sommet](#table-des-matières)**
+
+### Éviter la vérification de type (partie 1)
+
+JavaScript n'est pas typé, ce qui signifie que vos fonctions peuvent accepter n'importe quel type d'argument.
+Parfois, vous êtes mordu par cette liberté et cela devient tentant de le faire
+vérification de type dans vos fonctions. Il y a plusieurs façons d'éviter d'avoir à le faire.
+La première chose à considérer est des API cohérentes.
+
+**Mal:**
 
 ```javascript
-function travelToTexas(vehicle) {
-  vehicle.move(this.currentLocation, new Location("texas"));
+function voyagerAuTexas(véhicule) {
+  if (véhicule instanceof vélo) {
+    véhicule.pédale(this.localisationActuelle, new Location("texas"));
+  } else if (véhicule instanceof voiture) {
+    véhicule.conduire(this.localisationActuelle, new Location("texas"));
+  }
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
-
-### Avoid type-checking (part 2)
-
-If you are working with basic primitive values like strings and integers,
-and you can't use polymorphism but you still feel the need to type-check,
-you should consider using TypeScript. It is an excellent alternative to normal
-JavaScript, as it provides you with static typing on top of standard JavaScript
-syntax. The problem with manually type-checking normal JavaScript is that
-doing it well requires so much extra verbiage that the faux "type-safety" you get
-doesn't make up for the lost readability. Keep your JavaScript clean, write
-good tests, and have good code reviews. Otherwise, do all of that but with
-TypeScript (which, like I said, is a great alternative!).
-
-**Bad:**
+**Bien:**
 
 ```javascript
-function combine(val1, val2) {
+function voyagerAuTexas(véhicule) {
+  véhicule.déplacer(this.localisationActuelle, new Location("texas"));
+}
+```
+
+**[⬆ retour au sommet](#table-des-matières)**
+
+### Éviter la vérification de type (partie 2)
+
+Si vous travaillez avec des valeurs primitives de base telles que des chaînes et des entiers,
+et vous ne pouvez pas utiliser le polymorphisme mais vous ressentez toujours le besoin de vérifier le type,
+vous devriez envisager d'utiliser TypeScript. C'est une excellente alternative à la normale
+JavaScript, car il fournit du typage statique en plus du JavaScript standard
+syntaxe. Le problème avec la vérification manuelle du code JavaScript normal est que
+bien le faire nécessite tellement de verbiage supplémentaire que le faux "type-safety" que vous obtenez
+ne compense pas la lisibilité perdue. Gardez votre JavaScript propre, écrivez
+de bons tests et de bonnes critiques de code. Sinon, faites tout cela mais avec
+TypeScript (qui, comme je l'ai dit, est une excellente alternative!).
+
+**Mal:**
+
+```javascript
+function combiner(val1, val2) {
   if (
     (typeof val1 === "number" && typeof val2 === "number") ||
     (typeof val1 === "string" && typeof val2 === "string")
@@ -940,39 +940,39 @@ function combine(val1, val2) {
     return val1 + val2;
   }
 
-  throw new Error("Must be of type String or Number");
+  throw new Error("Doit être de type String ou Number");
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function combine(val1, val2) {
+function combiner(val1, val2) {
   return val1 + val2;
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Don't over-optimize
+### Ne pas trop optimiser
 
-Modern browsers do a lot of optimization under-the-hood at runtime. A lot of
-times, if you are optimizing then you are just wasting your time. [There are good
-resources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)
-for seeing where optimization is lacking. Target those in the meantime, until
-they are fixed if they can be.
+Les navigateurs modernes effectuent beaucoup d’optimisation au moment de l’exécution. Beaucoup de
+Parfois, si vous optimisez, vous perdez simplement votre temps. [Il y a de bons
+Ressources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)
+pour voir où l'optimisation fait défaut. Ciblez-les entre-temps, jusqu'à ce que
+ils sont fixes s'ils peuvent l'être.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-// On old browsers, each iteration with uncached `list.length` would be costly
-// because of `list.length` recomputation. In modern browsers, this is optimized.
+// Sur les anciens navigateurs, chaque itération avec `list.length` non mis en cache serait coûteuse
+// à cause du recalcul de `list.length`. Dans les navigateurs modernes, cela est optimisé.
 for (let i = 0, len = list.length; i < len; i++) {
   // ...
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
 for (let i = 0; i < list.length; i++) {
@@ -980,332 +980,333 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Remove dead code
+### Supprimer le code mort
 
-Dead code is just as bad as duplicate code. There's no reason to keep it in
-your codebase. If it's not being called, get rid of it! It will still be safe
-in your version history if you still need it.
+Le code mort est aussi grave qu'un code en double. Il n'y a aucune raison de le garder dans
+votre base de code. Si ce n'est pas appelé, éliminez-le! Il sera toujours en sécurité
+dans votre historique de version si vous en avez toujours besoin.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function oldRequestModule(url) {
+function ancienModuleDeDemande(url) {
   // ...
 }
 
-function newRequestModule(url) {
+function nouveauModuleDeDemande(url) {
   // ...
 }
 
-const req = newRequestModule;
-inventoryTracker("apples", req, "www.inventory-awesome.io");
+const req = nouveauModuleDeDemande;
+traqueurInventaire("pommes", req, "www.inventory-awesome.io");
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function newRequestModule(url) {
+function nouveauModuleDeDemande(url) {
   // ...
 }
 
-const req = newRequestModule;
-inventoryTracker("apples", req, "www.inventory-awesome.io");
+const req = nouveauModuleDeDemande;
+traqueurInventaire("pommed", req, "www.inventory-awesome.io");
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-## **Objects and Data Structures**
+## **Objets et Structures De Données**
 
-### Use getters and setters
+### Utilisez des getters et des setters
 
-Using getters and setters to access data on objects could be better than simply
-looking for a property on an object. "Why?" you might ask. Well, here's an
-unorganized list of reasons why:
+Utiliser des getters et des setters pour accéder aux données sur des objets pourrait être mieux que simplement
+chercher une propriété sur un objet. "Pourquoi?" vous pourriez demander. Eh bien, voici un
+liste non organisée des raisons pour lesquelles:
 
-- When you want to do more beyond getting an object property, you don't have
-  to look up and change every accessor in your codebase.
-- Makes adding validation simple when doing a `set`.
-- Encapsulates the internal representation.
-- Easy to add logging and error handling when getting and setting.
-- You can lazy load your object's properties, let's say getting it from a
-  server.
+- Lorsque vous voulez faire plus que d'obtenir une propriété d'objet, vous n'avez pas
+     pour rechercher et changer tous les accesseurs de votre base de code.
+- Facilite l'ajout d'une validation lors d'un `set`.
+- Encapsule la représentation interne.
+- Facile à ajouter la journalisation et la gestion des erreurs lors de l'obtention et la configuration.
+- Vous pouvez charger paresseux les propriétés de votre objet, disons l'obtenir d'un
+     serveur.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function makeBankAccount() {
+function faireUnCompteBancaire() {
   // ...
 
   return {
-    balance: 0
+    bilan: 0
     // ...
   };
 }
 
-const account = makeBankAccount();
-account.balance = 100;
+const compte = faireUnCompteBancaire();
+compte.bilan = 100;
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function makeBankAccount() {
-  // this one is private
-  let balance = 0;
+function faireUnCompteBancaire() {
+  // celui-ci est privé
+  let bilan = 0;
 
-  // a "getter", made public via the returned object below
-  function getBalance() {
-    return balance;
+  // un "getter", rendu public via l'objet renvoyé ci-dessous
+  function obtenirLeBilan() {
+    return bilan;
   }
 
-  // a "setter", made public via the returned object below
-  function setBalance(amount) {
-    // ... validate before updating the balance
-    balance = amount;
+  // un "setter", rendu public via l'objet retourné ci-dessous
+  function fixerLeBilan(montante) {
+    // ... valider avant de mettre à jour le solde
+    bilan = montante;
   }
 
   return {
     // ...
-    getBalance,
-    setBalance
+    obtenirLeBilan,
+    fixerLeBilan
   };
 }
 
-const account = makeBankAccount();
-account.setBalance(100);
+const compte = faireUnCompteBancaire();
+compte.fixerLeBilan(100);
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Make objects have private members
+### Faire en sorte que les objets aient des membres privés
 
-This can be accomplished through closures (for ES5 and below).
+Ceci peut être accompli par des fermetures (pour ES5 et moins).
 
-**Bad:**
+**Mal:**
 
 ```javascript
-const Employee = function(name) {
-  this.name = name;
+const Employé = function(nom) {
+  this.nom = nom;
 };
 
-Employee.prototype.getName = function getName() {
-  return this.name;
+Employé.prototype.obtenirNom = function obtenirNom() {
+  return this.nom;
 };
 
-const employee = new Employee("John Doe");
-console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
-delete employee.name;
-console.log(`Employee name: ${employee.getName()}`); // Employee name: undefined
+const employé = new Employé("John Doe");
+console.log(`Nom de l'employé: ${employé.obtenirNom()}`); // Nom de l'employé: John Doe
+delete employé.nom;
+console.log(`Nom de l'employé: ${employé.obtenirNom()}`); // Nom de l'employé: undefined
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function makeEmployee(name) {
+function faireEmployé(nom) {
   return {
-    getName() {
-      return name;
+    obtenirNom() {
+      return nom;
     }
   };
 }
 
-const employee = makeEmployee("John Doe");
-console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
-delete employee.name;
-console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
+const employé = faireEmployé("John Doe");
+console.log(`Nom de l'employé: ${employé.obtenirNom()}`); // Nom de l'employé: John Doe
+delete employé.nom;
+console.log(`Nom de l'employé: ${employé.obtenirNom()}`); // Nom de l'employé: undefined
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
 ## **Classes**
 
-### Prefer ES2015/ES6 classes over ES5 plain functions
+### Préférez les classes ES2015 / ES6 aux fonctions simples de ES5
 
-It's very difficult to get readable class inheritance, construction, and method
-definitions for classical ES5 classes. If you need inheritance (and be aware
-that you might not), then prefer ES2015/ES6 classes. However, prefer small functions over
-classes until you find yourself needing larger and more complex objects.
+Il est très difficile d'obtenir un héritage de classe, une construction et une méthode lisibles.
+définitions pour les classes ES5 classiques. Si vous avez besoin d'héritage (et soyez conscient
+que vous ne pourriez pas), alors préférez les classes ES2015 / ES6. Cependant, préférez les petites fonctions aux
+cours jusqu’à ce que vous ayez besoin d’objets plus grands et plus complexes.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-const Animal = function(age) {
-  if (!(this instanceof Animal)) {
-    throw new Error("Instantiate Animal with `new`");
+const Animale = function(âge) {
+  if (!(this instanceof Animale)) {
+    throw new Error("Instancier Animal avec `new`");
   }
 
-  this.age = age;
+  this.âge = âge;
 };
 
-Animal.prototype.move = function move() {};
+Animale.prototype.bouger = function bouger() {};
 
-const Mammal = function(age, furColor) {
-  if (!(this instanceof Mammal)) {
-    throw new Error("Instantiate Mammal with `new`");
+const Mammifère = function(age, couleurDefourrure) {
+  if (!(this instanceof Mammifère)) {
+    throw new Error("Instancier Mammifère avec `new`");
   }
 
-  Animal.call(this, age);
-  this.furColor = furColor;
+  Animale.appel(this, âge);
+  this.couleurDefourrure = couleurDefourrure;
 };
 
-Mammal.prototype = Object.create(Animal.prototype);
-Mammal.prototype.constructor = Mammal;
-Mammal.prototype.liveBirth = function liveBirth() {};
+Mammifère.prototype = Object.create(Animale.prototype);
+Mammifère.prototype.constructor = Mammifère;
+Mammifère.prototype.naissanceVivante = function naissanceVivante() {};
 
-const Human = function(age, furColor, languageSpoken) {
-  if (!(this instanceof Human)) {
-    throw new Error("Instantiate Human with `new`");
+const Humain = function(âge, couleurDefourrure, langueParlée) {
+  if (!(this instanceof Humain)) {
+    throw new Error("Instancier Humain avec `new`");
   }
 
-  Mammal.call(this, age, furColor);
-  this.languageSpoken = languageSpoken;
+  Mammifère.appel(this, âge, couleurDefourrure);
+  this.langueParlée = langueParlée;
 };
 
-Human.prototype = Object.create(Mammal.prototype);
-Human.prototype.constructor = Human;
-Human.prototype.speak = function speak() {};
+Humain.prototype = Object.create(Mammifère.prototype);
+Humain.prototype.constructor = Humain;
+Humain.prototype.parler = function parler() {};
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-class Animal {
-  constructor(age) {
-    this.age = age;
+class Animale {
+  constructor(âge) {
+    this.âge = âge;
   }
 
-  move() {
+  bouger() {
     /* ... */
   }
 }
 
-class Mammal extends Animal {
-  constructor(age, furColor) {
-    super(age);
-    this.furColor = furColor;
+class Mammifère extends Animale {
+  constructor(âge, couleurDefourrure) {
+    super(âge);
+    this.couleurDefourrure = couleurDefourrure;
   }
 
-  liveBirth() {
+  naissanceVivante() {
     /* ... */
   }
 }
 
-class Human extends Mammal {
-  constructor(age, furColor, languageSpoken) {
-    super(age, furColor);
+class Humain extends Mammal {
+  constructor(âge, couleurDefourrure, languageSpoken) {
+    super(âge, couleurDefourrure);
     this.languageSpoken = languageSpoken;
   }
 
-  speak() {
+  parler() {
     /* ... */
   }
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Use method chaining
+### Utiliser la méthode de chaînage
 
-This pattern is very useful in JavaScript and you see it in many libraries such
-as jQuery and Lodash. It allows your code to be expressive, and less verbose.
-For that reason, I say, use method chaining and take a look at how clean your code
-will be. In your class functions, simply return `this` at the end of every function,
-and you can chain further class methods onto it.
+Ce modèle est très utile en JavaScript et vous le voyez dans de nombreuses bibliothèques telles que
+comme jQuery et Lodash. Cela permet à votre code d’être expressif et moins bavard.
+Pour cette raison, dis-je, utilisez la méthode de chaînage et jetez un coup d'œil à la propreté de votre code
+sera. Dans vos fonctions de classe, retournez simplement `this` à la fin de chaque fonction,
+et vous pouvez y chaîner d’autres méthodes de classe.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-class Car {
-  constructor(make, model, color) {
-    this.make = make;
-    this.model = model;
-    this.color = color;
+class Voiture {
+  constructor(marque, modèle, couleur) {
+    this.marque = marque;
+    this.modèle = modèle;
+    this.couleur = couleur;
   }
 
-  setMake(make) {
-    this.make = make;
+  fixerLaMarque(marque) {
+    this.marque = marque;
   }
 
-  setModel(model) {
-    this.model = model;
+  fixerLaModèle(modèle) {
+    this.modèle = modèle;
   }
 
-  setColor(color) {
-    this.color = color;
+  fixerLaCouleur(couleur) {
+    this.couleur = couleur;
   }
 
-  save() {
-    console.log(this.make, this.model, this.color);
+  enregistrer() {
+    console.log(this.marque, this.modèle, this.couleur);
   }
 }
 
-const car = new Car("Ford", "F-150", "red");
-car.setColor("pink");
-car.save();
+const voiture = new Voiture("Ford", "F-150", "rouge");
+voiture.fixerLaCouleur("rose");
+voiture.enregistrer();
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-class Car {
-  constructor(make, model, color) {
-    this.make = make;
-    this.model = model;
-    this.color = color;
+class Voiture {
+  constructor(marque, modèle, couleur) {
+    this.marque = marque;
+    this.modèle = modèle;
+    this.couleur = couleur;
   }
 
-  setMake(make) {
-    this.make = make;
-    // NOTE: Returning this for chaining
+  fixerLaMarque(marque) {
+    this.marque = marque;
+    // NOTE: Renvoyer ceci pour chaîner
     return this;
   }
 
-  setModel(model) {
-    this.model = model;
-    // NOTE: Returning this for chaining
+  fixerLaModèle(modèle) {
+    this.modèle = modèle;
+    // NOTE: Renvoyer ceci pour chaîner
     return this;
   }
 
-  setColor(color) {
-    this.color = color;
-    // NOTE: Returning this for chaining
+  fixerLaCouleur(couleur) {
+    this.couleur = couleur;
+    // NOTE: Renvoyer ceci pour chaîner
     return this;
   }
 
-  save() {
-    console.log(this.make, this.model, this.color);
+  enregistrer() {
+    console.log(this.marque, this.modèle, this.couleur);
     // NOTE: Returning this for chaining
     return this;
   }
 }
 
-const car = new Car("Ford", "F-150", "red").setColor("pink").save();
+const voiture = new Voiture("Ford", "F-150", "rouge")
+  .fixerLaCouleur("rose")
+  .enregistrer();
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Prefer composition over inheritance
+### Préfère la composition à l'héritage
 
-As stated famously in [_Design Patterns_](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four,
-you should prefer composition over inheritance where you can. There are lots of
-good reasons to use inheritance and lots of good reasons to use composition.
-The main point for this maxim is that if your mind instinctively goes for
-inheritance, try to think if composition could model your problem better. In some
-cases it can.
+Comme l'a déclaré célèbre dans [_Design Patterns_](https://en.wikipedia.org/wiki/Design_Patterns) par la Gang of Four, vous devriez préférer la composition à l'héritage lorsque vous le pouvez. Il y a beaucoup de
+bonnes raisons d'utiliser l'héritage et beaucoup de bonnes raisons d'utiliser la composition.
+Le point principal de cette maxime est que si votre esprit opte instinctivement pour
+héritage, essayez de penser si la composition pourrait mieux modéliser votre problème. Dans certaines
+cas il peut.
 
-You might be wondering then, "when should I use inheritance?" It
-depends on your problem at hand, but this is a decent list of when inheritance
-makes more sense than composition:
+Vous vous demandez peut-être alors "quand devrais-je utiliser l'héritage?" Il
+dépend de votre problème actuel, mais ceci est une liste décente des cas où l'héritage
+est plus logique que la composition:
 
-1.  Your inheritance represents an "is-a" relationship and not a "has-a"
-    relationship (Human->Animal vs. User->UserDetails).
-2.  You can reuse code from the base classes (Humans can move like all animals).
-3.  You want to make global changes to derived classes by changing a base class.
-    (Change the caloric expenditure of all animals when they move).
+1.  Votre héritage représente une relation "est-une" et non une relation "a-une"
+         relation (Humain-> Animal contre Utilisateur-> UserDetails).
+2.  Vous pouvez réutiliser le code des classes de base (les humains peuvent se déplacer comme tous les animaux).
+3.  Vous souhaitez apporter des modifications globales aux classes dérivées en modifiant une classe de base.
+         (Changer la dépense calorique de tous les animaux quand ils bougent).
 
-**Bad:**
+**Mal:**
 
 ```javascript
 class Employee {
