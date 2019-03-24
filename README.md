@@ -335,30 +335,30 @@ ajouterMoisÀDate(1, date);
 
 **[⬆ retour au sommet](#table-des-matières)**
 
-### Functions should only be one level of abstraction
+### Les fonctions ne devraient être qu'un seul niveau d'abstraction
 
-When you have more than one level of abstraction your function is usually
-doing too much. Splitting up functions leads to reusability and easier
-testing.
+Lorsque vous avez plus d'un niveau d'abstraction, votre fonction est généralement
+faire trop. La scission des fonctions conduit à la réutilisation et à la facilité
+essai.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function parseBetterJSAlternative(code) {
+function mieuxAnalyserAlternatifJS(code) {
   const REGEXES = [
     // ...
   ];
 
-  const statements = code.split(" ");
-  const tokens = [];
+  const déclarations = code.split(" ");
+  const jetons = [];
   REGEXES.forEach(REGEX => {
-    statements.forEach(statement => {
+    déclarations.forEach(déclaration => {
       // ...
     });
   });
 
   const ast = [];
-  tokens.forEach(token => {
+  jetons.forEach(jeton => {
     // lex...
   });
 
@@ -368,13 +368,13 @@ function parseBetterJSAlternative(code) {
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function parseBetterJSAlternative(code) {
-  const tokens = tokenize(code);
-  const syntaxTree = parse(tokens);
-  syntaxTree.forEach(node => {
+function mieuxAnalyserAlternatifJS(code) {
+  const jetons = tokenize(code);
+  const arbreDeSyntaxe = analyser(jetons);
+  arbreDeSyntaxe.forEach(node => {
     // parse...
   });
 }
@@ -384,281 +384,280 @@ function tokenize(code) {
     // ...
   ];
 
-  const statements = code.split(" ");
-  const tokens = [];
+  const déclarations = code.split(" ");
+  const jetons = [];
   REGEXES.forEach(REGEX => {
-    statements.forEach(statement => {
-      tokens.push(/* ... */);
+    déclarations.forEach(déclaration => {
+      jetons.push(/* ... */);
     });
   });
 
-  return tokens;
+  return jetons;
 }
 
-function parse(tokens) {
-  const syntaxTree = [];
-  tokens.forEach(token => {
-    syntaxTree.push(/* ... */);
+function analyser(jetons) {
+  const arbreDeSyntaxe = [];
+  jetons.forEach(jeton => {
+    arbreDeSyntaxe.push(/* ... */);
   });
 
-  return syntaxTree;
+  return arbreDeSyntaxe;
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Remove duplicate code
+### Supprimez le code en double
 
-Do your absolute best to avoid duplicate code. Duplicate code is bad because it
-means that there's more than one place to alter something if you need to change
-some logic.
+Faites de votre mieux pour éviter le code en double. Dupliquer le code est mauvais parce que
+signifie qu'il y a plus d'un endroit pour changer quelque chose si vous avez besoin de changer
+un peu de logique.
 
-Imagine if you run a restaurant and you keep track of your inventory: all your
-tomatoes, onions, garlic, spices, etc. If you have multiple lists that
-you keep this on, then all have to be updated when you serve a dish with
-tomatoes in them. If you only have one list, there's only one place to update!
+Imaginez que vous dirigiez un restaurant et que vous gardiez une trace de votre inventaire: tous vos
+tomates, oignons, ail, épices, etc. Si vous avez plusieurs listes qui
+vous gardez ce sur, alors tous doivent être mis à jour lorsque vous servez un plat avec
+tomates en eux. Si vous n'avez qu'une seule liste, il n'y a qu'un seul endroit pour mettre à jour!
 
-Oftentimes you have duplicate code because you have two or more slightly
-different things, that share a lot in common, but their differences force you
-to have two or more separate functions that do much of the same things. Removing
-duplicate code means creating an abstraction that can handle this set of
-different things with just one function/module/class.
+Vous avez souvent un code en double parce que vous en avez deux ou plus légèrement
+choses différentes, qui partagent beaucoup en commun, mais leurs différences vous forcent
+d'avoir deux ou plusieurs fonctions distinctes qui font beaucoup de choses identiques. Enlever
+dupliquer le code signifie créer une abstraction capable de gérer cet ensemble de
+choses différentes avec une seule fonction / module / classe.
 
-Getting the abstraction right is critical, that's why you should follow the
-SOLID principles laid out in the _Classes_ section. Bad abstractions can be
-worse than duplicate code, so be careful! Having said this, if you can make
-a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself
-updating multiple places anytime you want to change one thing.
+Il est essentiel de bien comprendre l’abstraction, c’est pourquoi vous devriez suivre
+Principes SOLID énoncés dans la section _Classes_. Les mauvaises abstractions peuvent être
+pire que le code en double, alors soyez prudent! Cela dit, si vous pouvez faire
+une bonne abstraction, faites-le! Ne te répète pas, sinon tu te retrouveras
+mettre à jour plusieurs endroits chaque fois que vous voulez changer une chose.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function showDeveloperList(developers) {
-  developers.forEach(developer => {
-    const expectedSalary = developer.calculateExpectedSalary();
-    const experience = developer.getExperience();
-    const githubLink = developer.getGithubLink();
-    const data = {
-      expectedSalary,
-      experience,
-      githubLink
+function afficherLaListeDesDéveloppeurs(développeurs) {
+  développeurs.forEach(développeur => {
+    const salairePrévu = développeur.calculerSalairePrévu();
+    const expérience = développeur.obtenirExpérience();
+    const lienGithub = développeur.obtenirLienGithub();
+    const données = {
+      salairePrévu,
+      expérience,
+      lienGithub
     };
 
-    render(data);
+    rendre(données);
   });
 }
 
-function showManagerList(managers) {
-  managers.forEach(manager => {
-    const expectedSalary = manager.calculateExpectedSalary();
-    const experience = manager.getExperience();
-    const portfolio = manager.getMBAProjects();
-    const data = {
-      expectedSalary,
-      experience,
+function afficherLaListeDesGestionnaires(gestionnaires) {
+  gestionnaires.forEach(gestionnaire => {
+    const salairePrévu = gestionnaire.calculerSalairePrévu();
+    const expérience = gestionnaire.obtenirExpérience();
+    const portfolio = gestionnaire.obtenireProjetsMBA();
+    const données = {
+      salairePrévu,
+      expérience,
       portfolio
     };
 
-    render(data);
+    rendre(données);
   });
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function showEmployeeList(employees) {
-  employees.forEach(employee => {
-    const expectedSalary = employee.calculateExpectedSalary();
-    const experience = employee.getExperience();
+function afficherLaListeDesEmployés(employés) {
+  employés.forEach(employé => {
+    const salairePrévu = employés.calculerSalairePrévu();
+    const expérience = employés.obtenirExpérience();
 
-    const data = {
-      expectedSalary,
-      experience
+    const données = {
+      salairePrévu,
+      expérience
     };
 
-    switch (employee.type) {
-      case "manager":
-        data.portfolio = employee.getMBAProjects();
+    switch (employés.type) {
+      case "gestionnaire":
+        data.portfolio = employés.obtenireProjetsMBA();
         break;
-      case "developer":
-        data.githubLink = employee.getGithubLink();
+      case "développeur":
+        data.lienGithub = employés.obtenirLienGithub();
         break;
     }
 
-    render(data);
+    rendre(données);
   });
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Set default objects with Object.assign
+### Définir des objets par défaut avec Object.assign
 
-**Bad:**
+**Mal:**
 
 ```javascript
-const menuConfig = {
-  title: null,
-  body: "Bar",
-  buttonText: null,
-  cancellable: true
+const configMenu = {
+  titre: null,
+  corps: "Bar",
+  boutonTexte: null,
+  annulable: true
 };
 
-function createMenu(config) {
-  config.title = config.title || "Foo";
-  config.body = config.body || "Bar";
-  config.buttonText = config.buttonText || "Baz";
-  config.cancellable =
-    config.cancellable !== undefined ? config.cancellable : true;
+function créerUnMenu(config) {
+  config.titre = config.titre || "Foo";
+  config.corps = config.corps || "Bar";
+  config.boutonTexte = config.boutonTexte || "Baz";
+  config.annulable = config.annulable !== undefined ? config.annulable : true;
 }
 
-createMenu(menuConfig);
+créerUnMenu(configMenu);
 ```
 
 **Good:**
 
 ```javascript
-const menuConfig = {
-  title: "Order",
-  // User did not include 'body' key
-  buttonText: "Send",
-  cancellable: true
+const configMenu = {
+  titre: "Commande",
+  // L'utilisateur n'a pas inclus la clé 'corps'
+  boutonTexte: "Envoyer",
+  annulable: true
 };
 
-function createMenu(config) {
+function créerUnMenu(config) {
   config = Object.assign(
     {
-      title: "Foo",
-      body: "Bar",
-      buttonText: "Baz",
-      cancellable: true
+      titre: "Foo",
+      corps: "Bar",
+      boutonTexte: "Baz",
+      annulable: true
     },
     config
   );
 
-  // config now equals: {title: "Order", body: "Bar", buttonText: "Send", cancellable: true}
+  // config est maintenant égal à: {titre: "Commande", corps: "Bar", boutonTexte - "Envoyer", annulable: true}
   // ...
 }
 
-createMenu(menuConfig);
+créerUnMenu(configMenu);
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Don't use flags as function parameters
+### Ne pas utiliser les drapeaux comme paramètres de fonction
 
-Flags tell your user that this function does more than one thing. Functions should do one thing. Split out your functions if they are following different code paths based on a boolean.
+Les drapeaux indiquent à l'utilisateur que cette fonction fait plus d'une chose. Les fonctions devraient faire une chose. Répartissez vos fonctions si elles suivent différents chemins de code basés sur un booléen.
 
-**Bad:**
+**Mal:**
 
 ```javascript
-function createFile(name, temp) {
+function créerUnFichier(nom, temp) {
   if (temp) {
-    fs.create(`./temp/${name}`);
+    fs.create(`./temp/${nom}`);
   } else {
-    fs.create(name);
+    fs.create(nom);
   }
 }
 ```
 
-**Good:**
+**Bien:**
 
 ```javascript
-function createFile(name) {
-  fs.create(name);
+function créerUnFichier(nom) {
+  fs.create(nom);
 }
 
-function createTempFile(name) {
-  createFile(`./temp/${name}`);
+function créerUnFichierTemp(nom) {
+  créerUnFichier(`./temp/${nom}`);
 }
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**[⬆ retour au sommet](#table-des-matières)**
 
-### Avoid Side Effects (part 1)
+### Éviter les effets secondaires (partie 1)
 
-A function produces a side effect if it does anything other than take a value in
-and return another value or values. A side effect could be writing to a file,
-modifying some global variable, or accidentally wiring all your money to a
-stranger.
+Une fonction produit un effet secondaire si elle fait autre chose que prendre une valeur dans
+et renvoyer une ou plusieurs valeurs. Un effet secondaire pourrait être l'écriture dans un fichier,
+modifier une variable globale ou transférer accidentellement tout votre argent à un
+étranger.
 
-Now, you do need to have side effects in a program on occasion. Like the previous
-example, you might need to write to a file. What you want to do is to
-centralize where you are doing this. Don't have several functions and classes
-that write to a particular file. Have one service that does it. One and only one.
+Maintenant, vous devez avoir des effets secondaires dans un programme à l'occasion. Comme le précédent
+Par exemple, vous devrez peut-être écrire dans un fichier. Ce que tu veux faire c'est
+centraliser où vous faites cela. Ne pas avoir plusieurs fonctions et classes
+qui écrivent dans un fichier particulier. Avoir un service qui le fait. Seul et l'unique.
 
-The main point is to avoid common pitfalls like sharing state between objects
-without any structure, using mutable data types that can be written to by anything,
-and not centralizing where your side effects occur. If you can do this, you will
-be happier than the vast majority of other programmers.
+Le principal est d'éviter les pièges courants tels que le partage d'état entre objets
+sans aucune structure, en utilisant des types de données mutables qui peuvent être écrits par n'importe quoi,
+et ne pas centraliser où vos effets secondaires se produisent. Si vous pouvez faire cela, vous voudrez
+être plus heureux que la grande majorité des autres programmeurs.
 
-**Bad:**
-
-```javascript
-// Global variable referenced by following function.
-// If we had another function that used this name, now it'd be an array and it could break it.
-let name = "Ryan McDermott";
-
-function splitIntoFirstAndLastName() {
-  name = name.split(" ");
-}
-
-splitIntoFirstAndLastName();
-
-console.log(name); // ['Ryan', 'McDermott'];
-```
-
-**Good:**
+**Mal:**
 
 ```javascript
-function splitIntoFirstAndLastName(name) {
-  return name.split(" ");
+// Variable globale référencée par la fonction suivante.
+// Si nous avions une autre fonction qui utilisait ce nom, maintenant ce serait un tableau et cela pourrait le casser.
+let nom = "Gavish Barosee";
+
+function diviséEnPrénomEtNom() {
+  nom = nom.split(" ");
 }
 
-const name = "Ryan McDermott";
-const newName = splitIntoFirstAndLastName(name);
+diviséEnPrénomEtNom();
 
-console.log(name); // 'Ryan McDermott';
-console.log(newName); // ['Ryan', 'McDermott'];
+console.log(nom); // ['Gavish', 'Barosee'];
 ```
 
-**[⬆ back to top](#table-des-matières)**
+**Bien:**
 
-### Avoid Side Effects (part 2)
+```javascript
+function diviséEnPrénomEtNom(nom) {
+  return nom.split(" ");
+}
 
-In JavaScript, primitives are passed by value and objects/arrays are passed by
-reference. In the case of objects and arrays, if your function makes a change
-in a shopping cart array, for example, by adding an item to purchase,
-then any other function that uses that `cart` array will be affected by this
-addition. That may be great, however it can be bad too. Let's imagine a bad
+const nom = "Gavish Barosee";
+const nouveauNom = splitIntoFirstAndLastName(nom);
+
+console.log(nom); // 'Gavish Barosee';
+console.log(nouveauNom); // ['Gavish', 'Barosee'];
+```
+
+**[⬆ retour au sommet](#table-des-matières)**
+
+### Éviter les effets secondaires (partie 2)
+
+En JavaScript, les primitives sont passées par valeur et les objets / tableaux par
+référence. Dans le cas d'objets et de tableaux, si votre fonction effectue un changement
+dans un tableau de panier, par exemple, en ajoutant un article à acheter,
+alors toute autre fonction utilisant ce tableau `cart` sera affectée par cette
+une addition. Cela peut être formidable, mais cela peut aussi être mauvais. Imaginons un mauvais
 situation:
 
-The user clicks the "Purchase", button which calls a `purchase` function that
-spawns a network request and sends the `cart` array to the server. Because
-of a bad network connection, the `purchase` function has to keep retrying the
-request. Now, what if in the meantime the user accidentally clicks "Add to Cart"
-button on an item they don't actually want before the network request begins?
-If that happens and the network request begins, then that purchase function
-will send the accidentally added item because it has a reference to a shopping
-cart array that the `addItemToCart` function modified by adding an unwanted
-item.
+L'utilisateur clique sur le bouton "Acheter", qui appelle une fonction "achat" qui
+génère une requête réseau et envoie le tableau `cart` au serveur. Parce que
+d’une mauvaise connexion réseau, la fonction `purchase` doit continuer à réessayer la
+demande. Maintenant, qu'en est-il si, dans l'intervalle, l'utilisateur clique accidentellement sur "Ajouter au panier"
+bouton sur un élément dont ils ne veulent pas avant le début de la demande réseau?
+Si cela se produit et que la demande de réseau commence, alors cette fonction d'achat
+enverra l'élément ajouté accidentellement car il a une référence à un achat
+cart array que la fonction `addItemToCart` a modifiée en ajoutant un élément indésirable
+article.
 
-A great solution would be for the `addItemToCart` to always clone the `cart`,
-edit it, and return the clone. This ensures that no other functions that are
-holding onto a reference of the shopping cart will be affected by any changes.
+Une bonne solution serait pour le `addItemToCart` de toujours cloner le`cart`,
+éditez-le et retournez le clone. Cela garantit qu'aucune autre fonction ne soit
+conserver une référence du panier d'achat sera affecté par tout changement.
 
-Two caveats to mention to this approach:
+Deux mises en garde à mentionner à cette approche:
 
-1.  There might be cases where you actually want to modify the input object,
-    but when you adopt this programming practice you will find that those cases
-    are pretty rare. Most things can be refactored to have no side effects!
+1.  Il peut arriver que vous souhaitiez réellement modifier l’objet d’entrée,
+         mais lorsque vous adoptez cette pratique de programmation, vous constaterez que ces cas
+         sont assez rares. La plupart des choses peuvent être refactorisées sans effets secondaires!
 
-2.  Cloning big objects can be very expensive in terms of performance. Luckily,
-    this isn't a big issue in practice because there are
-    [great libraries](https://facebook.github.io/immutable-js/) that allow
-    this kind of programming approach to be fast and not as memory intensive as
-    it would be for you to manually clone objects and arrays.
+2.  Le clonage de gros objets peut être très coûteux en termes de performances. Heureusement,
+         ce n'est pas un gros problème dans la pratique car il y a
+    [grandes bibliothèques](https://facebook.github.io/immutable-js/) qui permettent
+         ce type d’approche de programmation doit être rapide et ne nécessite pas autant de mémoire que
+         ce serait à vous de cloner manuellement des objets et des tableaux.
 
 **Bad:**
 
