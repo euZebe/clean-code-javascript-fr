@@ -44,7 +44,7 @@ const yyyymmdstr = moment().format("YYYY/MM/DD");
 **Bien:**
 
 ```javascript
-const currentDate = moment().format("YYYY/MM/DD");
+const dateActuelle = moment().format("YYYY/MM/DD");
 ```
 
 **[⬆ retour au sommet](#table-des-matières)**
