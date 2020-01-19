@@ -26,11 +26,11 @@ Principes d'ingénierie logicielle, de l'ouvrage de Robert C. Martin
 adapté pour JavaScript. Ce n'est pas un guide de style. C'est un guide pour la production de logiciels
 [lisibles, réutilisables et refactorables](https://github.com/ryanmcdermott/3rs-of-software-architecture) en JavaScript.
 
-Tous les principes énoncés ici ne doivent pas être strictement suivis, et encore moins seront universellement acceptés. Ce sont des lignes directrices et rien de plus, mais ce sont des lignes codifiées au fil de nombreuses années d'expérience collective par les auteurs de _Clean Code_.
+Tous les principes énoncés ici ne doivent pas être suivis à la lettre, et ne sont pas universellement acceptés. Ce sont des lignes directrices et rien de plus, mais ce sont des lignes codifiées au fil de nombreuses années d'expérience collective par les auteurs de _Clean Code_.
 
-Notre métier de génie logiciel a un peu plus de 50 ans et nous apprenons encore beaucoup. Lorsque l'architecture logicielle est aussi ancienne que l'architecture elle-même, nous aurons peut-être des règles plus strictes à suivre. Pour l’instant, laissez ces instructions servir de point de repère pour évaluer la qualité du code JavaScript que vous et votre équipe produisez.
+Notre métier de génie logiciel a un peu plus de 50 ans et nous apprenons encore beaucoup. Lorsque l'architecture logicielle sera aussi ancienne que l'architecture elle-même, nous aurons peut-être des règles plus strictes à suivre. Pour l’instant, laissez ces instructions servir de point de repère pour évaluer la qualité du code JavaScript que vous et votre équipe produisez.
 
-Encore une chose: savoir que cela ne fera pas de vous un meilleur développeur de logiciels et travailler avec eux pendant de nombreuses années ne signifie pas que vous ne ferez pas d'erreurs. Chaque morceau de code commence par un premier brouillon, comme l'argile humide qui prend sa forme finale. Enfin, nous corrigeons les imperfections lorsque nous les examinons avec nos pairs. Ne vous battez pas pour les premières ébauches à améliorer. Battez le code à la place!
+Encore une chose: sachez que cela ne fera pas de vous un meilleur développeur de logiciels et suivre ces règles pendant de nombreuses années ne signifie pas que vous ne ferez pas d'erreurs. Chaque morceau de code commence par un premier brouillon, comme l'argile humide qui prend sa forme finale. Enfin, nous corrigeons les imperfections lorsque nous les examinons avec nos pairs. Ne vous flagellez pas pour les premières ébauches nécessitant des améliorations.
 
 ## **Variables**
 
