@@ -48,7 +48,7 @@ const yyyymmdstr = moment().format("YYYY/MM/DD");
 const dateActuelle = moment().format("YYYY/MM/DD");
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Utilisez le même vocabulaire pour le même type de variable
 
@@ -63,16 +63,15 @@ obtenirFicheDuClient();
 **Bien:**
 
 ```javascript
-obtenirUtiilisateur();
+obtenirUtilisateur();
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
-### Utilisez des noms interrogeables
+### Utilisez des noms pouvant être recherchés
 
-Nous lirons plus de code que nous n'en écrirons jamais. Il est important que le code nous
-écrire est lisible et consultable. Par _pas_ nommer les variables qui finissent par
-avoir un sens pour comprendre notre programme, nous avons blessé nos lecteurs.
+Nous lirons plus de code que nous n'en écrirons jamais. Il est important que le code que nous
+écrivons soit lisible et consultable. En ne nommant pas les variables de façon intelligible, qui ont du sens pour notre programme, nous perdons nos lecteurs.
 Rendez vos noms consultables. Des outils comme
 [buddy.js](https://github.com/danielstjules/buddy.js) et
 [ESLint](https://github.com/eslint/eslint/blob/660e0918933e6e7fede26bc675a0763a6b357c94/docs/rules/no-magic-numbers.md)
@@ -82,7 +81,7 @@ peuvent aider à identifier des constantes non nommées.
 
 ```javascript
 // Qu'est-ce que c'est que 86400000?
-setTimeout(misÀFeu, 86400000);
+setTimeout(miseAFeu, 86400000);
 ```
 
 **Bien:**
@@ -91,10 +90,10 @@ setTimeout(misÀFeu, 86400000);
 // Déclarez-les comme des constantes nommées capitalisées.
 const MILLISECONDES_PAR_JOUR = 86400000;
 
-setTimeout(misÀFeu, MILLISECONDES_PAR_JOUR);
+setTimeout(miseAFeu, MILLISECONDES_PAR_JOUR);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Utiliser des variables explicatives
 
@@ -118,7 +117,7 @@ const [, ville, codePostal] = adresse.match(codePostalVilleRegex) || [];
 enregistrerCodePostalVille(ville, codePostal);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter la cartographie mentale
 
@@ -153,7 +152,7 @@ endroits.forEach(endroit => {
 });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Ne pas ajouter de contexte inutile
 
@@ -188,19 +187,18 @@ function peindreLaVoiture(voiture) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
-### Utiliser des arguments par défaut au lieu de court-circuiter ou conditionnels
+### Utiliser des arguments par défaut au lieu de court-circuit ou conditionnels
 
-Les arguments par défaut sont souvent plus propres que les courts-circuits. Sachez que si vous
-utilisez-les, votre fonction ne fournira que les valeurs par défaut pour `undefined`
-arguments. Autres valeurs "fausses" telles que `''`, `" ",` `false`, `null`, `0` et
+Les arguments par défaut sont souvent plus propres que les courts-circuits. Sachez que si vous les
+utilisez, votre fonction ne fournira que les valeurs par défaut dans le cas où l'argument est `undefined`. Les autres valeurs "fausses" telles que `''`, `" ",` `false`, `null`, `0` et
 `NaN`, ne sera pas remplacé par une valeur par défaut.
 
 **Mal:**
 
 ```javascript
-function créerUneMicroBrasserie(nom) {
+function creerUneMicroBrasserie(nom) {
   const nomDeBrasserie = nom || "Hipster Brew Co.";
   // ...
 }
@@ -209,48 +207,41 @@ function créerUneMicroBrasserie(nom) {
 **Good:**
 
 ```javascript
-function créerUneMicroBrasserie(nom = "Hipster Brew Co.") {
+function creerUneMicroBrasserie(nom = "Hipster Brew Co.") {
   // ...
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Fonctions**
 
 ### Arguments de fonction (idéalement 2 ou moins)
 
-Limiter le nombre de paramètres de fonction est extrêmement important car
-facilite le test de votre fonction. Avoir plus de trois prospects à un
-explosion combinatoire où vous devez tester des tonnes de cas différents avec
-chaque argument séparé.
+Limiter le nombre de paramètres de fonction est extrêmement important car cela
+facilite le test de votre fonction. En avoir plus de trois mène à un
+explosion combinatoire où vous devez tester un grand nombre de valeurs différentes pour
+chaque argument.
 
-Un ou deux arguments est le cas idéal, et trois devraient être évités si possible.
-Quelque chose de plus que cela devrait être consolidé. Habituellement, si vous avez
-plus de deux arguments, votre fonction essaie de faire trop. Dans les cas
-où il n'est pas, la plupart du temps un objet de niveau supérieur suffira en tant que
-argument.
+Un ou deux arguments est le cas idéal ; évitez trois arguments si possible. Si vous avez
+plus de deux arguments, votre fonction fait probablement trop de choses. 
+Si ça n'est pas le cas, la plupart du temps un objet de niveau supérieur suffira en tant qu'argument.
 
-Puisque JavaScript vous permet de créer des objets à la volée, sans trop de classe
-passe-partout, vous pouvez utiliser un objet si vous vous trouvez nécessitant un
-beaucoup d'arguments.
+Puisque JavaScript vous permet de créer des objets à la volée, sans trop de classes fourre-tout, vous pouvez utiliser un 
+objet si vous avez besoin de beaucoup d'arguments.
+ 
+Pour rendre évidentes les propriétés attendues par la fonction, vous pouvez utiliser la syntaxe de déstructuration d'ES2015 / ES6. 
+Cela présente quelques avantages:
 
-Pour rendre évidentes les propriétés attendues par la fonction, vous pouvez utiliser le logiciel ES2015 / ES6.
-syntaxe de déstructuration. Cela présente quelques avantages:
-
-1.  Quand quelqu'un regarde la signature de la fonction, on voit immédiatement ce qui
-         les propriétés sont utilisées.
-2.  La destruction clone également les valeurs primitives spécifiées de l'argument
-         objet passé dans la fonction. Cela peut aider à prévenir les effets secondaires. Remarque:
-         les objets et les tableaux qui sont déstructurés à partir de l'objet argument ne sont PAS
-         cloné.
-3.  Les linters peuvent vous avertir des propriétés inutilisées, ce qui serait impossible
-         sans déstructuration.
+1.  En regardant la signature de la fonction, on voit immédiatement quelles propriétés sont utilisées.
+2.  La destruction clone également les valeurs primitives des objets passés en paramètres de fonction. Cela peut aider à éviter les effets secondaires. Remarque:
+les objets et les tableaux qui sont déstructurés à partir de l'objet argument ne sont PAS clonés.
+3.  Les linters peuvent vous avertir des propriétés inutilisées, ce qui serait impossible sans déstructuration.
 
 **Mal:**
 
 ```javascript
-function créerUnMenu(titre, corps, boutonTexte, annulable) {
+function creerUnMenu(titre, corps, boutonTexte, annulable) {
   // ...
 }
 ```
@@ -258,11 +249,11 @@ function créerUnMenu(titre, corps, boutonTexte, annulable) {
 **Bien:**
 
 ```javascript
-function créerUnMenu({ titre, corps, boutonTexte, annulable }) {
+function creerUnMenu({ titre, corps, boutonTexte, annulable }) {
   // ...
 }
 
-créerUnMenu({
+creerUnMenu({
   titre: "Foo",
   corps: "Bar",
   boutonTexte: "Baz",
@@ -270,15 +261,15 @@ créerUnMenu({
 });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
-### Les fonctions doivent faire une chose
+### Les fonctions doivent faire une seule chose
 
-C’est de loin la règle la plus importante en génie logiciel. Quand fonctionne
-faire plus d’une chose, il est plus difficile de composer, de tester et de raisonner.
-Lorsque vous pouvez isoler une fonction à une seule action, elles peuvent être refactorisées.
-facilement et votre code lira beaucoup plus propre. Si vous ne prenez rien d'autre de
-ce guide autre que celui-ci, vous serez en avance sur de nombreux développeurs.
+C’est de loin la règle la plus importante en génie logiciel. Quand des fonctions
+font plus d’une chose, elle sont plus difficiles à composer, tester et comprendre.
+Lorsque vous isolez une fonction à une seule action, celle-ci devient plus facilement à refactoriser
+et sa lecture en sera facilitée. Si vous ne devez garder qu'une chose de ce guide, c'est cette règle ; 
+vous serez en avance sur de nombreux développeurs.
 
 **Mal:**
 
@@ -306,41 +297,40 @@ function estClientActif(client) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Les noms de fonction doivent dire ce qu'ils font
 
 **Mal:**
 
 ```javascript
-function ajouterÀLaDate(date, mois) {
+function ajouterALaDate(date, mois) {
   // ...
 }
 
 const date = new Date();
 
 // Il est difficile de dire à partir du nom de la fonction ce qui est ajouté
-ajouterÀLaDate(date, 1);
+ajouterALaDate(date, 1);
 ```
 
 **Bien:**
 
 ```javascript
-function ajouterMoisÀDate(mois, date) {
+function ajouterMoisADate(mois, date) {
   // ...
 }
 
 const date = new Date();
-ajouterMoisÀDate(1, date);
+ajouterMoisADate(1, date);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
-### Les fonctions ne devraient être qu'un seul niveau d'abstraction
+### Les fonctions ne devraient avoir qu'un seul niveau d'abstraction
 
-Lorsque vous avez plus d'un niveau d'abstraction, votre fonction est généralement
-faire trop. La scission des fonctions conduit à la réutilisation et à la facilité
-essai.
+Lorsque vous avez plus d'un niveau d'abstraction, votre fonction en fait généralement trop. 
+Scinder des fonctions les rendent plus réutilisables et plus testables.
 
 **Mal:**
 
@@ -350,10 +340,10 @@ function mieuxAnalyserAlternatifJS(code) {
     // ...
   ];
 
-  const déclarations = code.split(" ");
+  const declarations = code.split(" ");
   const jetons = [];
   REGEXES.forEach(REGEX => {
-    déclarations.forEach(déclaration => {
+    declarations.forEach(déclaration => {
       // ...
     });
   });
@@ -385,10 +375,10 @@ function tokenize(code) {
     // ...
   ];
 
-  const déclarations = code.split(" ");
+  const declarations = code.split(" ");
   const jetons = [];
   REGEXES.forEach(REGEX => {
-    déclarations.forEach(déclaration => {
+    declarations.forEach(déclaration => {
       jetons.push(/* ... */);
     });
   });
@@ -406,7 +396,7 @@ function analyser(jetons) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Supprimez le code en double
 
@@ -415,52 +405,52 @@ signifie qu'il y a plus d'un endroit pour changer quelque chose si vous avez bes
 un peu de logique.
 
 Imaginez que vous dirigiez un restaurant et que vous gardiez une trace de votre inventaire: tous vos
-tomates, oignons, ail, épices, etc. Si vous avez plusieurs listes qui
-vous gardez ce sur, alors tous doivent être mis à jour lorsque vous servez un plat avec
-tomates en eux. Si vous n'avez qu'une seule liste, il n'y a qu'un seul endroit pour mettre à jour!
+tomates, oignons, ail, épices, etc. Si vous avez plusieurs listes sur lesquelles vous notez ce stock, 
+alors toutes doivent être mises à jour lorsque vous servez un plat avec des tomates. 
+Si vous n'avez qu'une seule liste, il n'y a qu'un seul endroit à mettre à jour !
 
-Vous avez souvent un code en double parce que vous en avez deux ou plus légèrement
-choses différentes, qui partagent beaucoup en commun, mais leurs différences vous forcent
-d'avoir deux ou plusieurs fonctions distinctes qui font beaucoup de choses identiques. Enlever
-dupliquer le code signifie créer une abstraction capable de gérer cet ensemble de
+Vous avez souvent du code en double parce que vous en avez deux ou plus légèrement
+différents, qui partagent beaucoup en commun, mais leurs différences vous forcent
+à avoir deux ou plusieurs fonctions distinctes qui font beaucoup de choses identiques. Supprimer
+la duplication de code signifie créer une abstraction capable de gérer cet ensemble de
 choses différentes avec une seule fonction / module / classe.
 
 Il est essentiel de bien comprendre l’abstraction, c’est pourquoi vous devriez suivre
 Principes SOLID énoncés dans la section _Classes_. Les mauvaises abstractions peuvent être
-pire que le code en double, alors soyez prudent! Cela dit, si vous pouvez faire
-une bonne abstraction, faites-le! Ne te répète pas, sinon tu te retrouveras
-mettre à jour plusieurs endroits chaque fois que vous voulez changer une chose.
+pire que le code en double, alors soyez prudent ! Cela dit, si vous pouvez faire
+une bonne abstraction, faites-le ! Ne vous répétez pas, sinon vous vous retrouverez à
+mettre à jour plusieurs endroits chaque fois que vous voudrez changer une chose.
 
 **Mal:**
 
 ```javascript
-function afficherLaListeDesDéveloppeurs(développeurs) {
-  développeurs.forEach(développeur => {
-    const salairePrévu = développeur.calculerSalairePrévu();
-    const expérience = développeur.obtenirExpérience();
-    const lienGithub = développeur.obtenirLienGithub();
-    const données = {
-      salairePrévu,
-      expérience,
+function afficherLaListeDesDeveloppeurs(developpeurs) {
+  developpeurs.forEach(developpeur => {
+    const salairePrévu = developpeur.calculerSalairePrevu();
+    const experience = developpeur.obtenirExperience();
+    const lienGithub = developpeur.obtenirLienGithub();
+    const donnees = {
+      salairePrevu,
+      experience,
       lienGithub
     };
 
-    rendre(données);
+    rendre(donnees);
   });
 }
 
 function afficherLaListeDesGestionnaires(gestionnaires) {
   gestionnaires.forEach(gestionnaire => {
-    const salairePrévu = gestionnaire.calculerSalairePrévu();
-    const expérience = gestionnaire.obtenirExpérience();
+    const salairePrevu = gestionnaire.calculerSalairePrevu();
+    const experience = gestionnaire.obtenirExperience();
     const portfolio = gestionnaire.obtenireProjetsMBA();
-    const données = {
-      salairePrévu,
-      expérience,
+    const donnees = {
+      salairePrevu,
+      experience,
       portfolio
     };
 
-    rendre(données);
+    rendre(donnees);
   });
 }
 ```
@@ -468,31 +458,31 @@ function afficherLaListeDesGestionnaires(gestionnaires) {
 **Bien:**
 
 ```javascript
-function afficherLaListeDesEmployés(employés) {
-  employés.forEach(employé => {
-    const salairePrévu = employés.calculerSalairePrévu();
-    const expérience = employés.obtenirExpérience();
+function afficherLaListeDesEmployes(employes) {
+  employes.forEach(employe => {
+    const salairePrevu = employes.calculerSalairePrevu();
+    const experience = employes.obtenirExperience();
 
-    const données = {
-      salairePrévu,
-      expérience
+    const donnees = {
+      salairePrevu,
+      experience
     };
 
-    switch (employés.type) {
+    switch (employes.type) {
       case "gestionnaire":
-        data.portfolio = employés.obtenireProjetsMBA();
+        data.portfolio = employes.obtenireProjetsMBA();
         break;
-      case "développeur":
-        data.lienGithub = employés.obtenirLienGithub();
+      case "developpeur":
+        data.lienGithub = employes.obtenirLienGithub();
         break;
     }
 
-    rendre(données);
+    rendre(donnees);
   });
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Définir des objets par défaut avec Object.assign
 
@@ -506,14 +496,14 @@ const configMenu = {
   annulable: true
 };
 
-function créerUnMenu(config) {
+function creerUnMenu(config) {
   config.titre = config.titre || "Foo";
   config.corps = config.corps || "Bar";
   config.boutonTexte = config.boutonTexte || "Baz";
   config.annulable = config.annulable !== undefined ? config.annulable : true;
 }
 
-créerUnMenu(configMenu);
+creerUnMenu(configMenu);
 ```
 
 **Good:**
@@ -526,7 +516,7 @@ const configMenu = {
   annulable: true
 };
 
-function créerUnMenu(config) {
+function creerUnMenu(config) {
   config = Object.assign(
     {
       titre: "Foo",
@@ -541,19 +531,21 @@ function créerUnMenu(config) {
   // ...
 }
 
-créerUnMenu(configMenu);
+creerUnMenu(configMenu);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Ne pas utiliser les drapeaux comme paramètres de fonction
 
-Les drapeaux indiquent à l'utilisateur que cette fonction fait plus d'une chose. Les fonctions devraient faire une chose. Répartissez vos fonctions si elles suivent différents chemins de code basés sur un booléen.
+Les drapeaux indiquent à l'utilisateur que cette fonction fait plus d'une chose. 
+Les fonctions devraient faire une seule chose. 
+Répartissez vos fonctions si elles suivent différents chemins de code basés sur un booléen.
 
 **Mal:**
 
 ```javascript
-function créerUnFichier(nom, temp) {
+function creerUnFichier(nom, temp) {
   if (temp) {
     fs.create(`./temp/${nom}`);
   } else {
@@ -565,33 +557,33 @@ function créerUnFichier(nom, temp) {
 **Bien:**
 
 ```javascript
-function créerUnFichier(nom) {
+function creerUnFichier(nom) {
   fs.create(nom);
 }
 
-function créerUnFichierTemp(nom) {
+function creerUnFichierTemp(nom) {
   créerUnFichier(`./temp/${nom}`);
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter les effets secondaires (partie 1)
 
-Une fonction produit un effet secondaire si elle fait autre chose que prendre une valeur dans
+Une fonction produit un effet secondaire si elle fait autre chose que prendre une valeur
 et renvoyer une ou plusieurs valeurs. Un effet secondaire pourrait être l'écriture dans un fichier,
 modifier une variable globale ou transférer accidentellement tout votre argent à un
 étranger.
 
-Maintenant, vous devez avoir des effets secondaires dans un programme à l'occasion. Comme le précédent
-Par exemple, vous devrez peut-être écrire dans un fichier. Ce que tu veux faire c'est
+Maintenant, vous devez avoir des effets secondaires dans un programme de temps en temps. Dans l'exemple précédent, 
+vous devrez peut-être écrire dans un fichier. Ce que vous voulez faire, c'est
 centraliser où vous faites cela. Ne pas avoir plusieurs fonctions et classes
-qui écrivent dans un fichier particulier. Avoir un service qui le fait. Seul et l'unique.
+qui écrivent dans un fichier particulier. Ayez un service qui le fait, seul et l'unique.
 
 Le principal est d'éviter les pièges courants tels que le partage d'état entre objets
 sans aucune structure, en utilisant des types de données mutables qui peuvent être écrits par n'importe quoi,
-et ne pas centraliser où vos effets secondaires se produisent. Si vous pouvez faire cela, vous voudrez
-être plus heureux que la grande majorité des autres programmeurs.
+et ne pas centraliser où vos effets secondaires se produisent. Si vous pouvez faire cela, vous serez
+plus heureux que la grande majorité des autres développeurs.
 
 **Mal:**
 
@@ -600,11 +592,11 @@ et ne pas centraliser où vos effets secondaires se produisent. Si vous pouvez f
 // Si nous avions une autre fonction qui utilisait ce nom, maintenant ce serait un tableau et cela pourrait le casser.
 let nom = "Gavish Barosee";
 
-function diviséEnPrénomEtNom() {
+function diviseEnPrenomEtNom() {
   nom = nom.split(" ");
 }
 
-diviséEnPrénomEtNom();
+diviseEnPrenomEtNom();
 
 console.log(nom); // ['Gavish', 'Barosee'];
 ```
@@ -612,7 +604,7 @@ console.log(nom); // ['Gavish', 'Barosee'];
 **Bien:**
 
 ```javascript
-function diviséEnPrénomEtNom(nom) {
+function diviseEnPrenomEtNom(nom) {
   return nom.split(" ");
 }
 
@@ -623,72 +615,70 @@ console.log(nom); // 'Gavish Barosee';
 console.log(nouveauNom); // ['Gavish', 'Barosee'];
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter les effets secondaires (partie 2)
 
 En JavaScript, les primitives sont passées par valeur et les objets / tableaux par
 référence. Dans le cas d'objets et de tableaux, si votre fonction effectue un changement
 dans un tableau de panier, par exemple, en ajoutant un article à acheter,
-alors toute autre fonction utilisant ce tableau `cart` sera affectée par cette
-une addition. Cela peut être formidable, mais cela peut aussi être mauvais. Imaginons un mauvais
+alors toute autre fonction utilisant ce tableau `panier` sera affectée par cette addition. 
+Cela peut être le comportement attendu, mais cela peut aussi être mauvais. Imaginons une mauvaise
 situation:
 
 L'utilisateur clique sur le bouton "Acheter", qui appelle une fonction "achat" qui
-génère une requête réseau et envoie le tableau `cart` au serveur. Parce que
-d’une mauvaise connexion réseau, la fonction `purchase` doit continuer à réessayer la
-demande. Maintenant, qu'en est-il si, dans l'intervalle, l'utilisateur clique accidentellement sur "Ajouter au panier"
-bouton sur un élément dont ils ne veulent pas avant le début de la demande réseau?
+génère une requête réseau et envoie le tableau `panier` au serveur. À cause
+d’une mauvaise connexion réseau, la fonction `purchase` doit réexécuter la
+demande. Maintenant, qu'en est-il si, dans l'intervalle, l'utilisateur clique accidentellement sur le bouton "Ajouter au panier"
+sur un élément dont il ne veut pas avant le début de la demande réseau ?
 Si cela se produit et que la demande de réseau commence, alors cette fonction d'achat
-enverra l'élément ajouté accidentellement car il a une référence à un achat
-cart array que la fonction `addItemToCart` a modifiée en ajoutant un élément indésirable
-article.
+enverra l'élément ajouté accidentellement car il a une référence au panier que la fonction `ajouterArticleAuPanier` a modifiée 
+en ajoutant un article indésirable.
 
-Une bonne solution serait pour le `addItemToCart` de toujours cloner le`cart`,
+Une bonne solution serait pour la fonction `ajouterArticleAuPanier` de toujours cloner le `panier`,
 éditez-le et retournez le clone. Cela garantit qu'aucune autre fonction ne soit
 conserver une référence du panier d'achat sera affecté par tout changement.
 
-Deux mises en garde à mentionner à cette approche:
+Deux mises en garde à mentionner à cette approche :
 
 1.  Il peut arriver que vous souhaitiez réellement modifier l’objet d’entrée,
          mais lorsque vous adoptez cette pratique de programmation, vous constaterez que ces cas
-         sont assez rares. La plupart des choses peuvent être refactorisées sans effets secondaires!
+         sont assez rares. La plupart des choses peuvent être refactorisées sans effet secondaire !
 
-2.  Le clonage de gros objets peut être très coûteux en termes de performances. Heureusement,
-         ce n'est pas un gros problème dans la pratique car il y a
-    [grandes libraries](https://facebook.github.io/immutable-js/) qui permettent
-         ce type d’approche de programmation doit être rapide et ne nécessite pas autant de mémoire que
-         ce serait à vous de cloner manuellement des objets et des tableaux.
+2.  Le clonage de gros objets peut être très coûteux en termes de performances. Heureusement, 
+ce n'est pas un gros problème dans la pratique car il y a de 
+[célèbres libraries](https://facebook.github.io/immutable-js/) qui permettent ce type d’approche et la rendent rapide et moins gourmande en ressource
+ que nécessiterait le clonage manuel des objets et des tableaux.
 
 **Mal:**
 
 ```javascript
-const AjouterUnArticleAuPanier = (panier, article) => {
-  cart.push({ article, date: Date.now() });
+const ajouterUnArticleAuPanier = (panier, article) => {
+  panier.push({ article, date: Date.now() });
 };
 ```
 
 **Bien:**
 
 ```javascript
-const AjouterUnArticleAuPanier = (panier, article) => {
+const ajouterUnArticleAuPanier = (panier, article) => {
   return [...panier, { article, date: Date.now() }];
 };
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Ne pas écrire dans les fonctions globales
 
-Les globaux polluants sont une mauvaise pratique en JavaScript car vous pourriez vous heurter à un autre
-bibliothèque et l'utilisateur de votre API serait absolument inutile jusqu'à ce qu'ils obtiennent un
-exception en production. Pensons à un exemple: et si vous vouliez
-étendre la méthode Array native de JavaScript pour avoir une méthode `diff` qui pourrait
-montrer la différence entre deux tableaux? Vous pouvez écrire votre nouvelle fonction
-`Array.prototype`, mais il pourrait entrer en conflit avec une autre bibliothèque qui a essayé
+Polluer les variables globales est une mauvaise pratique en JavaScript car vous pourriez rencontrer des conflits
+ avec une autre bibliothèque et l'utilisateur de votre API n'en serait pas conscient tant qu'il n'aurait pas rencontré
+une exception en production. Prenons un exemple: vous voulez
+étendre la méthode native Array de JavaScript pour avoir une méthode `diff` qui pourrait
+retourner la différence entre deux tableaux. Vous pouvez écrire votre nouvelle fonction
+`Array.prototype`, mais ça pourrait entrer en conflit avec une autre bibliothèque qui a essayé de
 faire la même chose. Et si cette autre bibliothèque utilisait simplement `diff` pour trouver
-la différence entre le premier et le dernier élément d'un tableau? C'est pourquoi ça
-Il serait bien mieux d’utiliser simplement les classes ES2015 / ES6 et d’étendre simplement le `Array` global.
+la différence entre le premier et le dernier élément d'un tableau ? C'est pourquoi il est préférable 
+d’utiliser simplement les classes ES2015 / ES6 et d’étendre simplement le `Array` global.
 
 **Mal:**
 
@@ -710,7 +700,7 @@ class SuperArray extends Array {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Privilégier la programmation fonctionnelle à la programmation impérative
 
@@ -775,7 +765,7 @@ const sortieTotale = sortieDuProgrammeur.reduce(
 );
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Encapsuler des conditions
 
@@ -799,7 +789,7 @@ if (devraitMontrerSpinner(fsmInstance, listNodeInstance)) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter les conditionnels négatifs
 
@@ -827,7 +817,7 @@ if (estDOMNodePresent(node)) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter les conditionnels
 
@@ -887,7 +877,7 @@ class Cessna extends Avion {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter la vérification de type (partie 1)
 
@@ -916,7 +906,7 @@ function voyagerAuTexas(véhicule) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Éviter la vérification de type (partie 2)
 
@@ -953,7 +943,7 @@ function combiner(val1, val2) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Ne pas trop optimiser
 
@@ -981,7 +971,7 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Supprimer le code mort
 
@@ -1015,7 +1005,7 @@ const req = nouveauModuleDeDemande;
 traqueurInventaire("pommed", req, "www.inventory-awesome.io");
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Objets et Structures De Données**
 
@@ -1078,7 +1068,7 @@ const compte = faireUnCompteBancaire();
 compte.fixerLeBilan(100);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Faire en sorte que les objets aient des membres privés
 
@@ -1118,7 +1108,7 @@ delete employé.nom;
 console.log(`Nom de l'employé: ${employé.obtenirNom()}`); // Nom de l'employé: undefined
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Classes**
 
@@ -1205,7 +1195,7 @@ class Humain extends Mammal {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Utiliser la méthode de chaînage
 
@@ -1287,7 +1277,7 @@ const voiture = new Voiture("Ford", "F-150", "rouge")
   .enregistrer();
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Préfère la composition à l'héritage
 
@@ -1356,7 +1346,7 @@ class Employé {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **SOLID**
 
@@ -1418,7 +1408,7 @@ class ParamètresUtilisateur {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Principe Ouvert / Fermé (POF)
 
@@ -1509,7 +1499,7 @@ class RequêtementHttp {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Principe de substitution de Liskov (PSL)
 
@@ -1628,7 +1618,7 @@ const formes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 rendreLesGrandesFormes(formes);
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Principe de séparation des interfaces (ISP)
 
@@ -1706,7 +1696,7 @@ const $ = new DOMTraverser({
 });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Principe d'inversion de dépendance (DIP)
 
@@ -1809,7 +1799,7 @@ const traqueurInventaire = new SuiviInventaire(
 traqueurInventaire.demanderDesArticles();
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Testage**
 
@@ -1880,7 +1870,7 @@ describe("Rendre MomentJS encore une fois génial", () => {
 });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Simultanéité**
 
@@ -1931,7 +1921,7 @@ get("https://en.wikipedia.org/wiki/Robert_Cecil_Martin")
   });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Async / Await sont encore plus propres que Promises
 
@@ -1978,7 +1968,7 @@ async function obtenirUnArticleDeCodePropre() {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **La Gestion des Erreurs**
 
@@ -2057,7 +2047,7 @@ getdata()
   });
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Mise En Forme**
 
@@ -2108,7 +2098,7 @@ class Animale {}
 class Alpaga {}
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Les appelants et les correspondants doivent être rapprochés
 
@@ -2196,7 +2186,7 @@ const evaluation = new ExamenDuRendement(employé);
 evaluation.examenDuRendement();
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## **Commentaires**
 
@@ -2243,7 +2233,7 @@ function hasher(données) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Ne laissez pas de code commenté dans votre base de code
 
@@ -2264,7 +2254,7 @@ faireUneChose();
 faireUneChose();
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Je n'ai pas de commentaires dans le journal
 
@@ -2293,7 +2283,7 @@ function combiner(a, b) {
 }
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ### Évitez les marqueurs de position
 
@@ -2332,7 +2322,7 @@ const actions = function() {
 };
 ```
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
 
 ## Traduction
 
@@ -2359,4 +2349,4 @@ Ceci est également disponible dans d'autres langues:
 - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italien**:
   [frappacchio/clean-code-javascript/](https://github.com/frappacchio/clean-code-javascript/)
 
-**[⬆ retour au sommet](#table-des-matières)**
+**[⬆ retour au sommaire](#table-des-matières)**
