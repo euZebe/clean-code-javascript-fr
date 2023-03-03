@@ -63,7 +63,7 @@ obtenirFicheDuClient();
 **Bien:**
 
 ```javascript
-obtenirUtiilisateur();
+obtenirUtilisateur();
 ```
 
 **[⬆ retour au sommet](#table-des-matières)**
